@@ -31,6 +31,7 @@ class _HomePageState extends State<HomePage> {
                 padding: const EdgeInsets.all(16.0),
                 crossAxisSpacing: 16,
                 mainAxisSpacing: 16,
+                childAspectRatio: 0.80,
                 children: const [
                   ProductCard(),
                   ProductCard(),

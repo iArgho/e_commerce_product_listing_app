@@ -6,10 +6,8 @@ class ProductCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        // TODO: Navigate or show product details
-      },
       borderRadius: BorderRadius.circular(12),
+      onTap: () {},
       child: Container(
         decoration: BoxDecoration(
           color: Colors.white,
@@ -25,9 +23,9 @@ class ProductCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Image Section
+            // Taller Image Section
             Container(
-              height: 120,
+              height: 160, // Increased height
               width: double.infinity,
               decoration: BoxDecoration(
                 color: Theme.of(context).primaryColor.withOpacity(0.1),
@@ -38,20 +36,19 @@ class ProductCard extends StatelessWidget {
               child: const Center(
                 child: Icon(
                   Icons.flutter_dash,
-                  size: 48,
+                  size: 56,
                   color: Colors.deepOrangeAccent,
                 ),
               ),
             ),
 
-            const SizedBox(height: 8),
+            const SizedBox(height: 7),
 
-            // Title
             const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 8),
+              padding: EdgeInsets.symmetric(horizontal: 12),
               child: Text(
                 'Product Name',
-                style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),
@@ -59,29 +56,60 @@ class ProductCard extends StatelessWidget {
 
             const SizedBox(height: 4),
 
-            // Price, Rating, Favorite
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 8),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12),
               child: Row(
-                children: [
+                children: const [
                   Text(
-                    '\$99',
+                    '\$69 ',
                     style: TextStyle(
-                      fontSize: 12,
+                      fontSize: 13,
                       color: Colors.deepOrangeAccent,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(width: 6),
-                  Icon(Icons.star, size: 12, color: Colors.amber),
-                  SizedBox(width: 2),
-                  Text('4.8', style: TextStyle(fontSize: 10)),
-                  Spacer(),
-                  Icon(
-                    Icons.favorite_border,
-                    size: 14,
-                    color: Colors.deepOrangeAccent,
+                  Text(
+                    '\$99',
+                    style: TextStyle(
+                      fontSize: 11,
+                      color: Colors.grey,
+                      decoration: TextDecoration.lineThrough,
+                    ),
                   ),
+                  SizedBox(width: 6),
+                  Text(
+                    '20% Off',
+                    style: TextStyle(
+                      fontSize: 10,
+                      color: Colors.green,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  Spacer(),
+                ],
+              ),
+            ),
+
+            const SizedBox(height: 4),
+
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              child: Row(
+                children: const [
+                  Icon(
+                    Icons.star_border, // Outlined star
+                    size: 14,
+                    color: Colors.amber,
+                    // Add a size or other modifiers to adjust appearance
+                  ),
+                  SizedBox(width: 4),
+                  Text('4.8', style: TextStyle(fontSize: 11)),
+                  SizedBox(width: 4),
+                  Text(
+                    '(42)',
+                    style: TextStyle(fontSize: 10, color: Colors.grey),
+                  ),
+                  Spacer(),
                 ],
               ),
             ),
