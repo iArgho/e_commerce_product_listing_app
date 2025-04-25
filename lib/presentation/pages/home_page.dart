@@ -3,6 +3,9 @@ import 'package:e_commerce_product_listing_app/service/api_service.dart';
 import 'package:e_commerce_product_listing_app/ui/widget/product_cart.dart';
 import 'package:flutter/material.dart';
 
+// BLoC-style event enum
+enum ProductEvent { fetch, search, sort }
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -20,14 +23,28 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    _loadProducts();
-    _searchController.addListener(_onSearchChanged);
+    dispatch(ProductEvent.fetch);
+    _searchController.addListener(() => dispatch(ProductEvent.search));
   }
 
   @override
   void dispose() {
     _searchController.dispose();
     super.dispose();
+  }
+
+  void dispatch(ProductEvent event, {String? payload}) {
+    switch (event) {
+      case ProductEvent.fetch:
+        _loadProducts();
+        break;
+      case ProductEvent.search:
+        _onSearchChanged();
+        break;
+      case ProductEvent.sort:
+        if (payload != null) _sortProducts(payload);
+        break;
+    }
   }
 
   void _onSearchChanged() {
@@ -75,41 +92,52 @@ class _HomePageState extends State<HomePage> {
       body: SafeArea(
         child: Column(
           children: [
-            // Search TextField
             Padding(
               padding: const EdgeInsets.all(16.0),
-              child: TextField(
-                controller: _searchController,
-                decoration: const InputDecoration(
-                  hintText: 'Search products...',
-                  suffixIcon: Icon(Icons.search),
-                  border: OutlineInputBorder(),
-                ),
-              ),
-            ),
-
-            // Sort Dropdown
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  DropdownButton<String>(
-                    value: _sortOption,
-                    items: const [
-                      DropdownMenuItem(value: 'None', child: Text('Sort')),
-                      DropdownMenuItem(
-                        value: 'Price: Low to High',
-                        child: Text('Low to High'),
+                  // Search Field
+                  Expanded(
+                    flex: 3,
+                    child: TextField(
+                      controller: _searchController,
+                      decoration: const InputDecoration(
+                        hintText: 'Search products...',
+                        prefixIcon: Icon(Icons.search),
+                        border: OutlineInputBorder(),
                       ),
-                      DropdownMenuItem(
-                        value: 'Price: High to Low',
-                        child: Text('High to Low'),
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  // Sort Dropdown
+                  Expanded(
+                    flex: 2,
+                    child: DropdownButtonFormField<String>(
+                      value: _sortOption,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        contentPadding: EdgeInsets.symmetric(
+                          horizontal: 12,
+                          vertical: 12,
+                        ),
                       ),
-                    ],
-                    onChanged: (value) {
-                      if (value != null) _sortProducts(value);
-                    },
+                      items: const [
+                        DropdownMenuItem(value: 'None', child: Text('Sort')),
+                        DropdownMenuItem(
+                          value: 'Price: Low to High',
+                          child: Text('Low to High'),
+                        ),
+                        DropdownMenuItem(
+                          value: 'Price: High to Low',
+                          child: Text('High to Low'),
+                        ),
+                      ],
+                      onChanged: (value) {
+                        if (value != null) {
+                          dispatch(ProductEvent.sort, payload: value);
+                        }
+                      },
+                    ),
                   ),
                 ],
               ),
