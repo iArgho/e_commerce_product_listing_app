@@ -1,4 +1,4 @@
-import 'package:e_commerce_product_listing_app/ui/home_page.dart';
+import 'package:e_commerce_product_listing_app/ui/presentation/home_page.dart';
 import 'package:flutter/material.dart';
 
 class ProductListing extends StatelessWidget {
