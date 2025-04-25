@@ -1,5 +1,5 @@
 name: e_commerce_product_listing_app
-description: "A new Flutter project."
+description: "A simple and elegant Flutter app that displays a list of products with search and sorting functionality. Built using Flutter and following a BLoC-style event management pattern.."
 publish_to: 'none'
 version: 1.0.0+1
 

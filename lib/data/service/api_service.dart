@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:e_commerce_product_listing_app/utils/url.dart';
+import 'package:e_commerce_product_listing_app/core/utils/url.dart';
 import 'package:http/http.dart' as http;
 import '../model/product_model.dart';
 

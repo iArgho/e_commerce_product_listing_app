@@ -1,6 +1,6 @@
-import 'package:e_commerce_product_listing_app/model/product_model.dart';
-import 'package:e_commerce_product_listing_app/service/api_service.dart';
-import 'package:e_commerce_product_listing_app/ui/widget/product_cart.dart';
+import 'package:e_commerce_product_listing_app/data/model/product_model.dart';
+import 'package:e_commerce_product_listing_app/data/service/api_service.dart';
+import 'package:e_commerce_product_listing_app/presentation/widget/product_cart.dart';
 import 'package:flutter/material.dart';
 
 // BLoC-style event enum
@@ -96,7 +96,7 @@ class _HomePageState extends State<HomePage> {
               padding: const EdgeInsets.all(16.0),
               child: Row(
                 children: [
-                  // Search Field
+                 // Search Field
                   Expanded(
                     flex: 3,
                     child: TextField(
